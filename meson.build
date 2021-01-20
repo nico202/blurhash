@@ -22,3 +22,13 @@ test('blurhash-tests', tests)
 
 executable('blurhash2bmp', 'blurhash2bmp.cpp', link_with: lib, install: true)
 executable('blurhash', 'image2blurhash.cpp', link_with: lib, install: true)
+
+install_headers('blurhash.hpp')
+
+pkg = import('pkgconfig')
+pkg.generate(libraries : [lib],
+             subdirs : ['.'],
+             version : meson.project_version(),
+             name : meson.project_name(),
+             filebase : meson.project_name(),
+             description : 'C++ blurhash encoder/decoder')
